@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='experiment1.css') }}" />
+
+</head>
+
+<body>
+    <div>
+        <div class="header">
+            <span class="header_title">행동경제학적 프로파일링 실험-1</span>
+            <a href="index">Login</a>
+            <a href="exp1">실험1</a>
+            <a href="exp2">실험2</a>
+        </div>
+        <div class="row main">
+            <div id="myDiv" class="col-10 chart"></div>
+            <div class="col-2 controller">
+                <div>
+                    <div class="pod_title">
+                        <span>배당확률</span>
+                    </div>
+                    <div class="pod_x">
+                        <span>X1</span>
+                        <input type="text" value="0.500" />
+                    </div>
+                    <div class="pod_x">
+                        <span>X2</span>
+                        <input type="text" value="0.500" />
+                    </div>
+                </div>
+
+                <div>
+                    <div class="pod_title">
+                        <span>주식별 배당 토큰</span>
+                    </div>
+                    <div class="podt_x">
+                        <span>X1</span>
+                        <input id="x_value" type="text" value="0.500" />
+                    </div>
+                    <div class="podt_x">
+                        <span>X2</span>
+                        <input id="y_value" type="text" value="0.500" />
+                    </div>
+                </div>
+
+                <div class="pod_result">
+                    <span>13/50</span>
+                    <button class="bt_result">결정</button>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <span>time</span>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='plotly-latest.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='experiment1.js') }}"></script>
+</body>
+
+</html>

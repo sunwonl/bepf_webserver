@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='index.css') }}" />
+
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="">
+        <div class="header">
+            <span class="header_title">행동경제학적 프로파일링 실험-로그인</span>
+            <a href="index">Login</a>
+            <a href="exp1">실험1</a>
+            <a href="epx2">실험2</a>
+        </div>
+        <div class="row">
+            <div class="content">
+                <div id="login-title">
+                    <span>행동경제학적 프로파일링 실험</span>
+                </div>
+                <form action="">
+                    <table>
+                        <tr>
+                            <td class="td_txt">E-mail</td>
+                            <td colspan="2"><input type="email" id="mail" /></td>
+                        </tr>
+                        <tr>
+                            <td class="td_txt">구분</td>
+                            <td class="btn_gubun">실험 1</td>
+                            <td class="btn_gubun">실험 2</td>
+                        </tr>
+                    </table>
+                    <div id="btn_start">
+                        <button>실험시작</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="footer">
+            <span>time</span>
+        </div>
+    </div>
+</body>
+
+</html>
