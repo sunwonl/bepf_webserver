@@ -59,13 +59,20 @@
                 </div>
 
                 <div class="pod_result">
-                    <span>13/50</span>
+                    <span>{{ round }}/50</span>
                     <button class="bt_result">결정</button>
                 </div>
             </div>
         </div>
         <div class="row footer">
-            <span>time</span>
+            <div class="footer">
+            <form id="expResult" action="/submit_exp2" method="post">
+                <input type="hidden" id="clicklogs" name="clicklogs"/>
+                <input type="hidden" id="round" name="round"/>
+                <input type="hidden" id="email" name="email"/>
+            </form>
+            <span>하나금융티아이 하나금융융합기술원</span>
+        </div>
         </div>
     </div>
 

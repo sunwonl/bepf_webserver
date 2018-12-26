@@ -1,8 +1,9 @@
 var layout = {
-    height: "800px",
     dragmode: false,
     hovermode: "closest",
     clickmode: "event+select",
+    autosize:false,
+    height: 900,
     margin: {
         l: 0,
         r: 0,
@@ -134,7 +135,6 @@ let isTouched = false;
 myPlot.on('plotly_hover', function (data) {
     // do something;
     if (isTouched) {
-        isTouched = false;
         var pts = '';
         for (var i = 0; i < data.points.length; i++) {
             pts = 'x=' + data.points[i].x.toFixed(2) + '\ny=' +
@@ -174,6 +174,7 @@ function touchHandler(event) {
             break;
         case "touchend":
             type = "mouseup";
+            isTouched = false;
             break;
         default:
             return;

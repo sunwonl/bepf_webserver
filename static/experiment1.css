@@ -65,6 +65,10 @@ button {
   margin-left: 10px;
 }
 
+.chart{
+  height: auto;
+}
+
 .col-1 {
   width: 8.33%;
 }

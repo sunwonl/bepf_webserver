@@ -1,8 +1,8 @@
 var layout = {
-    height: "1000px",
+    height: 900,
     hovermode: 'closest',
     clickmode: "event+select",
-    clickselectmode: "single",
+    //clickselectmode: "single",
     dragmode: false,
     yaxis: {
         title: "X2",
@@ -19,7 +19,6 @@ var config = {
     displayModeBar: false,
     responsive: false
 };
-
 
 
 function getData() {
@@ -57,6 +56,7 @@ const plotly = Plotly.newPlot('myDiv', getData(), layout, config);
 var myPlot = document.getElementById('myDiv');
 var x_value = document.getElementById("x_value");
 var y_value = document.getElementById("y_value");
+
 myPlot.on('plotly_click', function (data) {
     var pts = '';
     for (var i = 0; i < data.points.length; i++) {
@@ -66,5 +66,52 @@ myPlot.on('plotly_click', function (data) {
         y_value.value = data.points[i].y.toFixed(2);
     }
     //alert('Closest point clicked:\n\n' + pts);
+    logEmit();
     console.log('plotly_click:\n\n' + pts);
 });
+
+
+// click log making
+
+var email = document.getElementById('email').value;
+var round = document.getElementById("round").value;
+
+var clickLog = [{'email':email, 'round':round, 'ts':Date.now(), 'x':-1, 'y':-1}];
+
+// myPlot.addEventListener('click', function(event) {
+//
+// });
+
+function logEmit() {
+    var curTS = Date.now();
+    var x = x_value.value;
+    var y = y_value.value;
+
+    var log;
+    log = {'email': email, 'round':round, 'ts':curTS, 'x': parseFloat(x), 'y': parseFloat(y)};
+
+    clickLog.push(log);
+    console.log(log)
+}
+
+console.log('start rount #'+round)
+
+// submit current page
+
+function submitResult() {
+    if (clickLog.length == 1) {
+        alert("선택하지 않았습니다. 그래프 위의 점을 선택해주세요.");
+        return
+    }
+    var frm = document.getElementById("expResult");
+    var result = document.getElementById("clicklogs");
+
+    if (confirm("제출하시겠습니까?")) {
+        clickLog.push({'email':email, 'round':round, 'ts':Date.now(), 'x':-2, 'y':-2})
+        result.value = JSON.stringify(clickLog);
+        frm.submit()
+    } else {
+        console.log('cancel');
+    }
+
+}
