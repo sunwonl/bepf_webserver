@@ -100,6 +100,7 @@ html {
 
 #login-title {
     margin-bottom: 20px;
+    text-align: center;
 }
 
 table {
@@ -115,8 +116,22 @@ td {
 
 .td_txt {
     border: none;
+    border-bottom: solid 1px;
     padding-right: 5px;
     font-weight: bold;
+    width:240px;
+}
+
+.td_form {
+    width:160px;
+}
+
+.number_small {
+    width:40px;
+}
+
+.number_input {
+    width:100px;
 }
 
 #mail {
@@ -125,6 +140,7 @@ td {
 
 #btn_start {
     margin: 20px;
+    text-align: center;
 }
 
 #btn_start>button {
@@ -132,6 +148,6 @@ td {
 }
 
 .content{
-    width: 200px;
+    width: 400px;
     margin: 200px auto;
 }
