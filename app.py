@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import render_template, request
 from flask_sqlalchemy import SQLAlchemy
+from be_factor import *
 
 
 TOTAL_ROUND = 50
@@ -17,20 +18,14 @@ db = SQLAlchemy(app)
 class participant(db.Model):
     email = db.Column('email', db.String(50), primary_key=True)
     major = db.Column(db.String(20))
-    luv_cnt = db.Column(db.Integer)
-    luv_period = db.Column(db.Integer)
-    luv_term = db.Column(db.Integer)
     apply_company = db.Column(db.Integer)
     balance = db.Column(db.Integer)
     treat_single = db.Column(db.Integer)
     treat_total = db.Column(db.Integer)
 
-    def __init__(self, email, major, luv_cnt, luv_period, luv_term, apply_company, balance, treat_single, treat_total):
+    def __init__(self, email, major, apply_company, balance, treat_single, treat_total):
         self.email = email
         self.major = major
-        self.luv_cnt = luv_cnt
-        self.luv_period = luv_period
-        self.luv_term = luv_term
         self.apply_company = apply_company
         self.balance = balance
         self.treat_single = treat_single
@@ -68,31 +63,6 @@ def processing_click_logs(click_logs):
         print(l)
     db.session.commit()
 
-
-def line(ix, iy):
-    l = lambda x, y: x / ix + y / iy
-
-    return l
-
-
-def compute_ccei(p1, p2):
-    ccei1 = line(p1['ix'], p2['iy'])(p2['x'], p2['y'])
-    ccei2 = line(p2['ix'], p2['iy'])(p1['x'], p1['y'])
-
-    if (ccei1 >= 1) or (ccei2 >= 1):
-        return 1
-    else:
-        return max(ccei1, ccei2)
-
-
-def compute_risk_aversion(exp_logs):
-
-    pass
-
-
-def compute_loss_aversion(exp_logs):
-
-    pass
 
 @app.route('/')
 def hello_world():
