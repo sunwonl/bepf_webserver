@@ -20,8 +20,8 @@ class participant(db.Model):
     major = db.Column(db.String(20))
     apply_company = db.Column(db.Integer)
     balance = db.Column(db.Integer)
-    treat_single = db.Column(db.Integer)
-    treat_total = db.Column(db.Integer)
+    treat_single = db.Column(db.Float)
+    treat_total = db.Column(db.Float)
 
     def __init__(self, email, major, apply_company, balance, treat_single, treat_total):
         self.email = email
