@@ -15,9 +15,6 @@
     <div>
         <div class="header">
             <span class="header_title">행동경제학적 프로파일링 실험-1</span>
-            <a href="index">Login</a>
-            <a href="exp1">실험1</a>
-            <a href="exp2">실험2</a>
         </div>
         <div class="row main">
             <div id="myDiv" class="col-10 chart"></div>
@@ -28,11 +25,11 @@
                     </div>
                     <div class="pod_x">
                         <span>X1</span>
-                        <input type="text" value="0.500" />
+                        <input type="text" value="0.500" disabled />
                     </div>
                     <div class="pod_x">
                         <span>X2</span>
-                        <input type="text" value="0.500" />
+                        <input type="text" value="0.500" disabled />
                     </div>
                 </div>
 
@@ -42,11 +39,11 @@
                     </div>
                     <div class="podt_x">
                         <span>X1</span>
-                        <input id="x_value" type="text" value="0.500" />
+                        <input id="x_value" type="text" value="0" disabled />
                     </div>
                     <div class="podt_x">
                         <span>X2</span>
-                        <input id="y_value" type="text" value="0.500" />
+                        <input id="y_value" type="text" value="0" disabled />
                     </div>
                 </div>
 
@@ -68,7 +65,7 @@
         </div>
     </div>
 
-    <script src="{{ url_for('static', filename='plotly-latest.min.js') }}"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="{{ url_for('static', filename='experiment1.js') }}"></script>
 </body>
 

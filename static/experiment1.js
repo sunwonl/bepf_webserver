@@ -1,5 +1,6 @@
 var layout = {
-    height: 900,
+    height: 800,
+    width: 800,
     hovermode: 'closest',
     clickmode: "event+select",
     //clickselectmode: "single",
