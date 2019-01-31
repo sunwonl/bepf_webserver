@@ -76,7 +76,7 @@ myPlot.on('plotly_click', function (data) {
             text: pts,
             x: data.points[i].x,
             y: data.points[i].y
-        }
+        };
 
         annotations = [];
         annotations.push(annotation);
