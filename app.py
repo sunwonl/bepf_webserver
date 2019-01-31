@@ -109,10 +109,12 @@ def make_result(email):
 
 def process_reward(email, round, secure, reward):
     print('Processing reward')
-    rr = reward_rec(email, round, secure, reward)
-    db.session.add(rr)
+    exists = reward_rec.query.filter_by(email=email).first()
 
-    db.session.commit()
+    rr = reward_rec(email, round, secure, reward)
+    if not exists:
+        db.session.add(rr)
+        db.session.commit()
 
 
 @app.route('/')
