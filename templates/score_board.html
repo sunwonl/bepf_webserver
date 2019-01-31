@@ -24,7 +24,8 @@
             </div>
         </div>
         <div class="row">
-            <table>
+            <div class="content">
+                <table>
                     {% for idx, email in winners %}
                         {% if idx % 5 == 0 %}
                             <tr>
@@ -35,6 +36,7 @@
                         {% endif %}
                     {% endfor %}
                 </table>
+            </div>
         </div>
         <div class="footer">
             <span>하나금융티아이 하나금융융합기술원</span>
