@@ -91,7 +91,7 @@ def processing_click_logs(click_logs):
 def make_result(email):
     sql = 'select email, round, ts, x, y from (select email, round, ts, x, y, rank() over (partition by email, round order by ts desc) rnk from exp_log where x > 0) x where x.rnk = 1 and email="{}"'.format(email)
     import pandas as pd
-    df = pd.read_sql(sql, db.engine)
+    df = pd.read_sql(sql, db.engine.connect())
 
     import random
     selected_round = min(TOTAL_ROUND, max(round(random.uniform(0, TOTAL_ROUND)), 0))
