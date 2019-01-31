@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from be_factor import *
 
 
-TOTAL_ROUND = 50
+TOTAL_ROUND = 3
 
 app = Flask(__name__)
 
@@ -56,9 +56,9 @@ class reward_rec(db.Model):
     secure = db.Column(db.String(1))
     reward = db.Column(db.Float)
 
-    def __init__(self, email, round, secure, reward):
+    def __init__(self, email, r, secure, reward):
         self.email = email
-        self.round = round
+        self.round = r
         self.secure = secure
         self.reward = reward
 
@@ -91,10 +91,9 @@ def processing_click_logs(click_logs):
 def make_result(email):
     sql = 'select email, round, ts, x, y from (select email, round, ts, x, y, rank() over (partition by email, round order by ts desc) rnk from exp_log where x > 0) x where x.rnk = 1 and email="{}"'.format(email)
     result = db.engine.execute(sql)
-    print([r for r in result])
+
     import pandas as pd
     df = pd.read_sql(sql, db.engine.connect())
-
     import random
     selected_round = min(TOTAL_ROUND, max(round(random.uniform(0, TOTAL_ROUND)), 0))
     secure_idx = round(random.uniform(0, 1))
@@ -107,8 +106,8 @@ def make_result(email):
 
 def process_reward(email, round, secure, reward):
     print('Processing reward')
-    reward_rec(email, round, secure, reward)
-    db.session.add(reward_rec)
+    rr = reward_rec(email, round, secure, reward)
+    db.session.add(rr)
 
     db.session.commit()
 
@@ -145,7 +144,7 @@ def exp1(email, cur_round):
         return render_template('experiment1.html', round=str(cur_round+1), email=email)
     else:
         selected_round, secure, reward = make_result(email)
-        process_reward(email, selected_round, secure, reward)
+        process_reward(email, selected_round, secure, float(reward))
         return render_template('end_exp.html',
                                email=email,
                                round=selected_round,
