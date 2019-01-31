@@ -132,7 +132,7 @@ def init_exp():
         db.session.add(p)
         db.session.commit()
     r = get_last_round(email)
-    r = int(r)+1
+    r = int(r)
     return redirect(url_for('exp1', email=email, cur_round=r))
 
 
@@ -140,7 +140,7 @@ def init_exp():
 def exp1(email, cur_round):
     cur_round = int(cur_round)
     if cur_round < TOTAL_ROUND:
-        return render_template('experiment1.html', round=str(cur_round), email=email)
+        return render_template('experiment1.html', round=str(cur_round+1), email=email)
     else:
         selected_round, secure, reward = make_result(email)
         process_reward(email, selected_round, secure, reward)
