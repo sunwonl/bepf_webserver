@@ -71,6 +71,16 @@ myPlot.on('plotly_click', function (data) {
             data.points[i].y.toFixed(2) + '\n\n';
         x_value.value = data.points[i].x.toFixed(2);
         y_value.value = data.points[i].y.toFixed(2);
+
+        annotation = {
+            text: pts,
+            x: data.points[i].x,
+            y: data.points[i].y
+        }
+
+        annotations = [];
+        annotations.push(annotation);
+        Plotly.relayout('myDiv', {annotations: annotations})
     }
     //alert('Closest point clicked:\n\n' + pts);
     logEmit();
