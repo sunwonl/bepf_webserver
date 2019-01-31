@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='index.css') }}" />
+
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="">
+        <div class="header">
+            <span class="header_title">행동경제학적 프로파일링 실험</span>
+        </div>
+        <div class="row">
+            <div class="content">
+                <div id="login-title">
+                    <div>행동경제학적 프로파일링 실험 당첨자입니다.</div>
+                    <div>축하합니다!</div>
+                </div>
+
+                <table>
+                    {% for idx, email in winners %}
+                        {% if idx % 5 == 0 %}
+                            <tr>
+                        {% endif %}
+                        <td> {{ email }}</td>
+                        {% if idx % 5 == 4 %}
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+        <div class="footer">
+            <span>하나금융티아이 하나금융융합기술원</span>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -117,6 +117,14 @@ def process_reward(email, round, secure, reward):
         db.session.commit()
 
 
+def get_top_rewards():
+    sql = 'select * from reward_rec order by reward desc limit 35'
+    header = ['email', 'round', 'secure', 'reward']
+    exec_res = db.engine.execute(sql)
+    result = [r for r in exec_res]
+
+
+
 @app.route('/')
 def hello_world():
     return render_template('index.html')
@@ -184,6 +192,17 @@ def end_exp():
                            secure='None',
                            reward='None'
                            )
+
+
+@app.route('/score_board')
+def score_board():
+    sql = 'select email from reward_rec order by reward desc limit 35'
+    exec_result = db.engine.execute(sql)
+    result = [r[0] for r in exec_result]
+    result = list(zip(range(len(result)), result))
+
+    return render_template('score_board.html',
+                           winners=result)
 
 
 if __name__ == '__main__':
