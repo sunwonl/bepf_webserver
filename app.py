@@ -68,14 +68,13 @@ db.create_all()
 
 def get_last_round(email):
     sql = """
-    select round 
-    from exp_log
+    select round  from exp_log
     where email='{}' order by round desc limit 1""".format(email)
 
     result = db.engine.execute(sql)
     last_round = [r[0] for r in result]
     if len(last_round) == 0:
-        last_round = [1]
+        last_round = [0]
     return last_round[0]
 
 
@@ -90,11 +89,7 @@ def processing_click_logs(click_logs):
 
 
 def make_result(email):
-    sql = '''
-    select email, round, ts, x, y 
-    from (
-	    select email, round, ts, x, y, rank() over (partition by email, round order by ts desc) rnk from exp_log where x > 0
-    ) x where x.rnk = 1 and email="{}"'''.format(email)
+    sql = 'select email, round, ts, x, y from (select email, round, ts, x, y, rank() over (partition by email, round order by ts desc) rnk from exp_log where x > 0) x where x.rnk = 1 and email="{}"'.format(email)
     import pandas as pd
     df = pd.read_sql(sql, db.engine)
 
@@ -145,7 +140,7 @@ def init_exp():
 def exp1(email, cur_round):
     cur_round = int(cur_round)
     if cur_round < TOTAL_ROUND:
-        return render_template('experiment1.html', round=str(cur_round+1), email=email)
+        return render_template('experiment1.html', round=str(cur_round), email=email)
     else:
         selected_round, secure, reward = make_result(email)
         process_reward(email, selected_round, secure, reward)
