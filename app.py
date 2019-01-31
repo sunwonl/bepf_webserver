@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from be_factor import *
 
 
-TOTAL_ROUND = 3
+TOTAL_ROUND = 50
 
 app = Flask(__name__)
 
