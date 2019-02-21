@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>행동경제학 프로파일링 결과지</title>
+    <script language="JavaScript">
+        ccei=[98,91,96,99,99,97,97,98,99,97,97,99,98,96,94,94,95,99,98,95,92,98,94,95,100,99,96,98,91,98,95,98,96,97,99,98,100,98,99,96,96,98,96,96,94,98,94,99,95,97,99,96,94,99,98,98,95,97,93,99,93,97,92,94,99,99,97,98,98,98,99,98,99,96,99,95,97,97,95,98,97,99,99,95,99,89,98,97,98,94,95,93,98,99,99,98,95,97,97,99,99,96,97,97,98,96,96,97,97,96,95,97,96,99,99,90,98,97,98,99,97,99,94,96,95,98,98,99,96,97,96,99,97,100,77,97,95,99,95,92,96,97,94,99,97,96,99,96,99,99,96,99,99,97,99,99,98,98,98,98,93,99,100,99,99,99,94,96,99,96,96,94,92,98,99,96,98,96,99,94,94,97,99,95,96,97,92,97,96,97,96,99,96,97,98,92,99,98,98,93,95,96,99,97,88,93,98,97,97,95,99,91,94,99,98,92,98,99,99,98,98,99,84,99,97,96,95,99,98,93,95,99,97,99,96,97,93,89,94,98,97,98,98,98,98,97,97,97,96,97,99,97,91,98,99,98,97,99,98,96,99,95,94,94,98,98,98,96,99,98,97,99,98,97,97,98,95,97,98,97,99,97,98,99,97,95,98,98,99,97,99,97,97,99,99,97,99,98,99,99,99,95,99,97,99,81,99,88,95,93,96,99]
+        alpha=[69,71,82,73,73,71,54,75,68,73,72,75,68,73,62,72,70,73,53,72,83,70,68,73,73,73,73,73,73,72,73,74,71,72,71,79,73,73,74,76,78,72,70,73,73,73,77,62,74,74,73,74,73,62,75,65,73,74,81,73,73,70,76,67,69,72,71,73,71,73,75,73,73,68,73,69,73,73,83,73,72,73,73,73,73,73,79,73,76,74,58,64,73,73,73,72,73,84,70,73,73,73,73,71,57,72,74,72,71,73,74,73,72,73,73,73,76,73,73,73,67,73,82,72,73,73,73,74,72,72,71,73,61,72,73,74,71,70,73,81,71,73,73,73,73,73,73,68,73,73,73,73,73,72,72,73,70,72,73,72,75,72,68,72,72,73,73,72,71,72,70,78,73,71,71,73,74,73,73,73,73,69,72,73,69,76,72,73,71,73,73,73,58,71,71,76,73,71,73,73,73,72,72,73,73,72,73,73,73,76,71,78,64,73,69,73,73,73,74,72,73,72,91,73,73,75,73,73,73,76,72,75,73,73,71,72,86,73,73,73,73,71,73,73,52,72,73,72,73,73,73,72,77,73,71,74,75,74,73,73,73,73,73,73,73,70,73,73,72,72,53,73,74,73,73,74,65,71,74,73,73,73,73,73,73,73,73,74,73,73,73,71,72,71,73,73,73,73,72,70,73,57,69,73,72,73,75,72,73,67,74,73]
+        rho=[41,94,57,48,45,57,66,56,51,30,52,45,55,51,78,73,66,51,7,53,67,52,71,48,44,50,55,55,69,51,65,54,58,56,52,58,49,61,50,70,75,49,69,58,73,73,70,49,56,51,33,57,81,46,51,47,49,55,70,50,71,43,64,77,48,51,53,55,56,45,52,57,47,57,50,60,69,59,55,63,54,53,50,50,50,73,61,42,57,80,98,78,52,68,49,54,66,65,45,50,36,71,45,57,50,61,67,57,53,73,59,58,68,50,52,73,58,57,59,50,56,45,71,60,53,54,66,50,59,57,46,58,35,50,73,57,60,49,48,91,58,60,85,53,50,58,73,75,55,50,73,53,50,54,52,43,49,58,73,51,76,51,45,55,50,50,69,57,51,59,76,61,73,58,47,53,55,57,50,51,73,37,51,60,72,55,51,54,66,55,52,53,70,54,57,59,20,56,44,55,91,56,50,65,73,64,50,54,69,62,50,72,75,45,54,73,50,49,53,52,55,50,62,50,50,69,71,49,49,59,54,50,56,18,61,58,75,73,53,56,61,51,45,62,61,56,55,62,60,54,54,51,83,51,48,52,58,51,42,60,34,73,73,73,53,55,52,61,50,52,63,50,55,56,53,54,59,56,56,56,46,56,49,50,58,50,52,56,50,60,42,56,54,52,73,57,50,57,50,34,45,70,43,52,50,73,53,22,60,70,60,50]
+
+        function print_score(divid, s, col) {
+            var width = document.getElementById(divid).offsetWidth;
+            var height = document.getElementById(divid).offsetHeight;
+
+            var divarea = d3.select("#" + divid);
+            var svg = divarea.append("svg");
+            var start = 20;
+            var end = 180;
+            x_pos = (s/100)*(width-40)+20;
+
+            y_center = height/2;
+
+            svg.append("svg:line").attr("x1", start).attr("x2", end)
+				.attr("y1", y_center).attr("y2", y_center).style("stroke-width", 40).style(
+						"stroke", col);
+            svg.append("svg:line").attr("x1", x_pos).attr("x2", x_pos)
+				.attr("y1", y_center-20).attr("y2", y_center+20).style("stroke-width", 3).style(
+						"stroke", "red");
+			svg.append("svg:text").attr("x", start-5).attr("y", y_center+35).attr("stroke", "black").text("0");
+			svg.append("svg:text").attr("x", end-15).attr("y", y_center+35).attr("stroke", "black").text("100");
+        }
+
+        function print_scatterplot(divid, data) {
+            var margin = {top: 20, right: 15, bottom: 60, left: 60}
+            var width = 600 - margin.left - margin.right;
+            var height = 520 - margin.top - margin.bottom;
+            console.log(data.length);
+
+            var x = d3.scaleLinear()
+                      .domain([0, d3.max(data, function(d) { return d[0]; })])
+                      .range([ 0, width ]);
+
+            var y = d3.scaleLinear()
+                      .domain([0, d3.max(data, function(d) { return d[1]; })])
+                      .range([ height, 0 ]);
+
+            var cValue = function(d) { return d[2];},
+                color = d3.scaleOrdinal(d3.schemeCategory10);
+
+            var chart = d3.select('#' + divid)
+            .append('svg:svg')
+            .attr('width', width + margin.right + margin.left)
+            .attr('height', height + margin.top + margin.bottom)
+            .attr('class', 'chart');
+
+            var main = chart.append('g')
+            .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+            .attr('width', width)
+            .attr('height', height)
+            .attr('class', 'main');
+
+            // draw the x axis
+            var xAxis = d3.axisBottom()
+            .scale(x);
+
+            main.append('g')
+                .attr('transform', 'translate(0,' + height + ')')
+                .attr('class', 'main axis date')
+                .call(xAxis)
+            .append("text")
+                .attr("class", "label")
+                .attr("x", width)
+                .attr("y", -6)
+                .attr("stroke", "black")
+                .style("text-anchor", "end")
+                .text("Loss aversion");
+;
+
+            // draw the y axis
+            var yAxis = d3.axisLeft()
+            .scale(y);
+
+            main.append('g')
+                .call(yAxis)
+            .append("text")
+                .attr("class", "label")
+                .attr("transform", "rotate(-90)")
+                .attr("y", 6)
+                .attr("dy", ".71em")
+                                .attr("stroke", "black").attr("stroke", "black")
+                .style("text-anchor", "end")
+                .text("Risk aversion");
+
+            var g = main.append("svg:g");
+
+            g.selectAll("scatter-dots")
+              .data(data)
+              .enter().append("svg:circle")
+                  .attr("cx", function (d,i) { return x(d[0]); } )
+                  .attr("cy", function (d) { return y(d[1]); } )
+                  .attr("r", function (d) { return d[2]; })
+                  .style("fill", function(d) { return color(cValue(d));}) ;
+
+          }
+    </script>
+    <style>
+        .solid_border {
+
+            text-align: center;
+        }
+
+        .dot_border {
+
+            text-align: center;
+            padding: 5px;
+        }
+
+        .score_div {
+            text-align: center;
+            height: 100px;
+            width: 200px;
+
+        }
+
+        .score_title {
+            font-family:"arial";
+            font-weight:bold;
+            font-size:20px;
+        }
+
+        .score {
+            font-family:"arial black";
+            font-weight:bold;
+            font-size:45px;
+        }
+
+    </style>
+</head>
+<body>
+    <center>
+        <h2>
+           sarah941123@naver.com 님의 프로파일링 결과입니다.
+        </h2>
+        <br/>
+    <table style="width:600px;" class="solid_border">
+        <tr>
+            <td class="dot_border">
+                <span class="score_title">Rationality</span>
+                <br/>
+                <span id="ccei_score" class="score">99</span>
+                <br/>
+                <span> 평균: 96.69</span>
+                <br/>
+                <span> 표준편차: 2.73</span>
+
+                <div id="ccei" class="score_div" style="border:solid 1">
+                </div>
+
+            </td>
+            <td class="dot_border">
+
+                <span class="score_title">Loss aversion</span>
+                <br/>
+                <span id="alpha_score" class="score">75</span>
+                <br/>
+                <span> 평균: 72.27</span>
+                <br/>
+                <span> 표준편차: 4.09</span>
+                <div id="alpha" class="score_div">
+                </div>
+
+            </td>
+            <td class="dot_border">
+
+                <span class="score_title">Risk aversion</span>
+                <br/>
+                <span id="rho_score" class="score">50</span>
+                <br/>
+                <span> 평균: 56.66</span>
+                <br/>
+                <span> 표준편차: 11.30</span>
+                <div id="rho" class="score_div">
+                </div>
+
+            </td>
+        </tr>
+        <tr>
+            <td class="dot_border">
+                <div>
+                    의사결정의 일관성을 나타냅니다. 높은 점수일수록 '일관된 경제적 의사결정 기준' 을 가지고 있다고 해석합니다.
+                </div>
+            </td>
+            <td class="dot_border">
+                <div>
+                    "손실 회피 정도"를 나타냅니다. 높을 수록 손실을 회피하는 경향을 보이는 것으로 해석합니다.
+                    손실 회피는 같은 양의 이익에서 발생하는 양의 효용보다, 손실에서 발생하는 음의 효용의 크기가 훨씬 큰 현상을 말합니다.
+                </div>
+            </td>
+            <td class="dot_border">
+                <div>
+                    "위험 회피 정도"를 나타냅니다. 높을 수록 위험을 회피하는 경향을 보이는 것으로 해석합니다.
+                    경제학에서의 위험은 확정적이지 않은 상태를 말하며, 위험회피는 같은 기대효용을 가지는 두개 이상의 소비 상황에서,
+                    효용의 정도가 확정되지 않은 상황보다 확정적으로 나타나는 효용의 소비상황을 선호하는 것을 말합니다.
+                </div>
+            </td>
+        </tr>
+    </table>
+    <h2>
+        당신의 위치는?
+    </h2>
+    <div id="position" class="scatter">
+
+    </div>
+    <div id="explanation">
+
+    </div>
+    </center>
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script language="JavaScript">
+        print_score("ccei", 99, '#5274B2');
+        print_score("alpha", 75, '#EBFF47');
+        print_score("rho", 50, '#FF9A89');
+
+        var data = []
+        for (var i=0; i < alpha.length; i++) {
+            data.push([alpha[i], rho[i], 3])
+        }
+        data.push([75, 50, 8]);
+        print_scatterplot('position', data);
+    </script>
+</body>
+</html>
