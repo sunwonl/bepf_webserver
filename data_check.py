@@ -1,0 +1,12 @@
+import pandas as pd
+
+
+if __name__ == '__main__':
+    df = pd.read_excel('data/raw_data.xlsx')
+
+    print(df.head())
+    print(len(df))
+
+    print(df.columns)
+
+    print(len(df.groupby('email')))
